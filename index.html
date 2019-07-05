@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>psychic game</title>
+</head>
+
+
+<body>
+
+<h3>Guess what letter I'm thinking of?</h3>
+<p id="wins">Wins: </p>
+<p id="lose">Lose: </p>
+<p id="guessLeft"> </p>
+<p id="yourGuessSoFar"> Your guess so far: </p>
+
+	<script type="text/javascript" >
+
+        var counter = 9;
+
+        var letters = [];
+
+		// var correct = ['a','c','r','i','x','g','p','z','e'];
+
+		var pLeft = document.getElementById('guessLeft');
+		
+
+		pLeft.innerText = "guesses left: " + counter;
+
+
+		
+
+		function updateCounter(){
+
+			counter--;
+
+			pLeft.innerText = 'guesses left: ' + counter;
+
+			letters.push(event.key);
+			
+			document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters;
+
+            
+           
+		}
+
+		document.onkeypress = updateCounter;
+
+
+
+		function updateCounteraei(){
+
+
+			if( letters.includes('a','e','i','o','u')){
+
+				counter++;
+
+				document.getElementById('wins').onkeypress.innerText = "Wins:  " + counter;
+			}
+      
+           
+		}
+
+		
+
+
+		
+
+			
+	</script>
+
+</body>
+</html>
