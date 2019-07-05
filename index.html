@@ -10,55 +10,100 @@
 <h3>Guess what letter I'm thinking of?</h3>
 <p id="wins">Wins: </p>
 <p id="lose">Lose: </p>
-<p id="guessLeft"> </p>
+<p id="guessLeft"> Guesses left:  </p>
 <p id="yourGuessSoFar"> Your guess so far: </p>
 
 	<script type="text/javascript" >
 
-        var counter = 9;
+		var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+        var win = 0;
+        var lose = 0;
+        //count guess left
+        var guesLeft = 9;
+        
+        //Letters I guessed
         var letters = [];
+
+        var userGuess = updateguesLeft;
 
 		// var correct = ['a','c','r','i','x','g','p','z','e'];
 
 		var pLeft = document.getElementById('guessLeft');
 		
 
-		pLeft.innerText = "guesses left: " + counter;
+//Letter computer guess
+		
+		
+        var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+        console.log(computerGuess);
+       
+
+
+
+		
+		function updateguesLeft(){
+
+			guesLeft--;
+
+			pLeft.innerText = 'Guesses left: ' + guesLeft;
+
+			var playerGuess = event.key.toLowerCase();
+
+			letters.push(playerGuess);
+			
+			document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters;
+    
+		}
+
+		document.onkeypress = updateguesLeft;
+//------------------------------------------------------
+      function guessedLetter(){
+
+			
+			var playerGuess = event.key.toLowerCase();
+
+			letters.push(playerGuess);
+			
+			document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters;
+    
+		}
+
+		// document.onkeypress = guessedLetter;
 
 
 		
 
-		function updateCounter(){
 
-			counter--;
 
-			pLeft.innerText = 'guesses left: ' + counter;
 
-			letters.push(event.key);
-			
-			document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters;
+//--------------------------------------------------
 
-            
-           
+		if(computerGuess == playerGuess){
+
+			win++;
+			document.getElementById('wins').innerText = "Wins: " + win;
+ 
+
+
+
 		}
-
-		document.onkeypress = updateCounter;
-
+	
 
 
-		function updateCounteraei(){
+
+		// function updateCounteraei(){
 
 
-			if( letters.includes('a','e','i','o','u')){
+		// 	if( letters.includes('a','e','i','o','u')){
 
-				counter++;
+		// 		counter++;
 
-				document.getElementById('wins').onkeypress.innerText = "Wins:  " + counter;
-			}
+		// 		document.getElementById('wins').onkeypress.innerText = "Wins:  " + counter;
+		// 	}
       
            
-		}
+		
 
 		
 
