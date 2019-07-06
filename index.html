@@ -1,117 +1,93 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>psychic game</title>
-</head>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>psychic game</title>
+	</head>
 
 
-<body>
+	<body>
 
-<h3>Guess what letter I'm thinking of?</h3>
-<p id="wins">Wins: </p>
-<p id="lose">Lose: </p>
-<p id="guessLeft"> Guesses left:  </p>
-<p id="yourGuessSoFar"> Your guess so far: </p>
+		<h3>Guess what letter I'm thinking of?</h3>
+		<p id="wins">Wins: </p>
+		<p id="lose">Loses: </p>
+		<p id="guessLeft"> Guesses left:  </p>
+		<p id="yourGuessSoFar"> Your guess so far: </p>
 
-	<script type="text/javascript" >
+		<script type="text/javascript" >
 
-		var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+			var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-        var win = 0;
-        var lose = 0;
-        //count guess left
-        var guesLeft = 9;
-        
-        //Letters I guessed
-        var letters = [];
-
-        var userGuess = updateguesLeft;
-
-		// var correct = ['a','c','r','i','x','g','p','z','e'];
-
-		var pLeft = document.getElementById('guessLeft');
-		
-
-//Letter computer guess
-		
-		
-        var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
-        console.log(computerGuess);
-       
+			var win = 0;
+			var lose = 0;
+	        //count guess left
+	        var guesLeft = 9;
+	        //Letters I guessed
+	        var letters = [];
 
 
 
-		
-		function updateguesLeft(){
-
-			guesLeft--;
-
-			pLeft.innerText = 'Guesses left: ' + guesLeft;
-
-			var playerGuess = event.key.toLowerCase();
-
-			letters.push(playerGuess);
-			
-			document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters;
-    
-		}
-
-		document.onkeypress = updateguesLeft;
-//------------------------------------------------------
-      function guessedLetter(){
-
-			
-			var playerGuess = event.key.toLowerCase();
-
-			letters.push(playerGuess);
-			
-			document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters;
-    
-		}
-
-		// document.onkeypress = guessedLetter;
+	//Letter computer guess	
+	var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 
 
-		
+	//guess Left 	
+	function updateguesLeft(){
+
+		document.getElementById('guessLeft').innerText = 'Guesses left: ' + guesLeft;
+	}
+	// Already guessed letters
+	function soFarGuess(){
+
+		document.getElementById('yourGuessSoFar').innerText = "Your guess so far: " + letters.join( ', ' );
+	}
+	//call function updateguesLeft--show initial gueLeft:9
+	updateguesLeft();	
+	//------------------------------------------------------
+	 //reset, renew all varialbles. Renew vars, there should not 
+	 //include "var letters = []"---should be"letters = []"
+	 var resetVar = function(){
+	 //count guess left
+	 guesLeft = 9;
+	         //Letters I guessed
+	         letters = [];
+	         computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+	     }
+
+
+	// Heppenning when key press:  
+	//returns keypress into function
+	document.onkeypress = function(){
+	//9 8 7 6 5 4 3 2.....
+	guesLeft--;
+	//show letter when key pressed
+	var playerGuess = event.key.toLowerCase();
+	//Add letters into Array--Letters[]
+	letters.push(playerGuess);
+	//run Function: updateguesLeft, soFarGuess
+	updateguesLeft();
+	soFarGuess();
+	console.log(computerGuess);
+	//--------------------------------------------------
+
+
+	if(computerGuess == playerGuess){
+		win++;
+		document.getElementById('wins').innerText = "Wins: " + win;
+		resetVar();
+	}else if(guesLeft == 0) {
+		lose++;
+		document.getElementById('lose').innerText = "Loses: " + lose;
+		resetVar();
+
+	}
+}
 
 
 
 
-//--------------------------------------------------
 
-		if(computerGuess == playerGuess){
-
-			win++;
-			document.getElementById('wins').innerText = "Wins: " + win;
- 
-
-
-
-		}
-	
-
-
-
-		// function updateCounteraei(){
-
-
-		// 	if( letters.includes('a','e','i','o','u')){
-
-		// 		counter++;
-
-		// 		document.getElementById('wins').onkeypress.innerText = "Wins:  " + counter;
-		// 	}
-      
-           
-		
-
-		
-
-
-		
-
-			
-	</script>
+</script>
 
 </body>
 </html>
